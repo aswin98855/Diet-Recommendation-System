@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <title>web</title>
+    <style>
+        body {
+            background-color: #702c63;
+            padding-left: 0px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .logo-title {
+            display: flex;
+        }
+
+        @font-face {
+            font-family: Tanker;
+            src: url('/static/Tanker-Regular.otf') format('otf'),
+                url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.eot') format('eot'),
+                url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.ttf') format('ttf'),
+                url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.woff') format('woff'),
+                url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.woff2') format('woff2');
+
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 ,h5,h6{
+            font-family: Tanker;
+            color: rgb(228, 228, 228);
+        }
+
+        .navbar-nav {
+            margin-left: auto ! important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /********nav-bar*****/
+        .navbar {
+            width: 100%;
+            height: 100px;
+            background-color: #702c63;
+            position: fixed;
+            top: 0;
+            display: flex;
+            gap: 1%;
+
+            flex-grow: 1;
+
+        }
+
+        .container-fluid {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .navbar-collapse {
+            border-bottom-left-radius: 80% 80%;
+            border-bottom-right-radius: 80% 80%;
+            padding-bottom: 10px;
+            background-color: #702c63;
+            text-align: center;
+        }
+
+        .btn-sign {
+            margin: auto;
+        }
+
+        .navbar-nav {
+            padding-top: 20px;
+            gap: 5%;
+            flex-basis: 500px;
+        }
+
+        /*
+    .elements{
+      display: flex;
+      padding-left: 60px;
+      padding-top: 10px;
+      margin-left:20%;
+      gap:50px;
+      opacity:1;
+    }
+    .logo img{
+      height:50px;
+    
+    }
+   
+    h2,h3,h4{
+      font-family: Tanker;
+      color:rgb(228, 228, 228);
+    }
+    
+    .btn{ /* to voluntarily place buttton at top right corner*/
+        /* position: absolute;
+      right:10px;
+    }
+    /* .btn1{  border-radius: 7px;
+      border:0px;
+      height:38px;
+    display: none;}
+*/
+        .it {
+            font-size: 1.5vw;
+        }
+
+
+
+        /************* heading and images***************/
+        .bod {
+            padding-top: 10px;
+
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+
+        }
+
+        .content {
+            width: 100%;
+            margin-top: 100px;
+            color: rgb(228, 228, 228);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .content .head {
+            font-family: Tanker;
+            font-size: 10vw;
+        }
+
+        .content .under_head {
+            font-size: 3vw;
+        }
+
+        .img1 {
+            margin-top: 95px;
+            width: 100%;
+        }
+
+        .img1 img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        /****************************************/
+        /**information**/
+
+        .information {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 100%;
+            display: flex;
+            z-index: -2;
+            /* height: 800px;*/
+            /*background-color:#804a76;*/
+            gap: 10%;
+        }
+
+        .box {
+            width: 30%;
+            height: 585px;
+            border-radius: 10%;
+
+
+        }
+
+        li,
+        p {
+            color: black;
+
+        }
+
+        p {
+            text-align: center;
+        }
+
+        /** flipping**/
+        .flip-inner {
+            /*width:100%;*/
+            height: 100%;
+            position: relative;
+            transition: 0.8s;
+            transform-style: preserve-3d;
+            z-index: -1;
+        }
+
+        .flip-front,
+        .flip-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            /* Safari */
+            backface-visibility: hidden;
+        }
+
+        .flip-back {
+            background-color: rgb(255 248 229);
+            border-radius: 10%;
+            padding: 10px;
+            transform: rotateY(180deg);
+            text-align: left;
+        }
+
+        .box:hover .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        /*about**********************/
+        .about {
+            background-color: #5f1350;
+            height: 620px;
+            gap: 20%;
+            flex-direction: row-reverse;
+            padding: 20px;
+        }
+
+        .about img {
+            margin-top: 20px;
+            height: 85%;
+            width: 400px;
+        }
+
+        .about p {
+            font-size: 1.6vw;
+        }
+
+        .about-cont {
+            text-align: start;
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+        }
+        
+
+        .sign-log {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (max-width: 1235px) {
+            .it {
+                /*hide the elemnts*/
+                font-size: 20px;
+            }
+
+            .elements {
+                /* wish */
+                flex-direction: column;
+                pointer-events: none;
+                margin-left: 0px;
+                padding-left: 20px;
+                margin-top: 20px;
+                opacity: 0;
+
+            }
+
+            @media (max-width:992px) {
+                .navbar-collapse {
+                    background-color: #691b5a;
+                }
+
+            }
+
+            @media(max-width:919px) {
+
+                .information {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 110px;
+                    padding-top: 50px;
+                    padding-bottom: 0px;
+                    /* height: 800px;*/
+
+                }
+
+                .box {
+                    height: 200px;
+
+                    margin: auto;
+                    position: relative;
+                    z-index: -1;
+                    background-color: none;
+
+                }
+
+                .box:hover .flip-inner {
+                    transform: rotateY(0deg);
+                }
+
+                .about {
+                    margin-top: 110px;
+                }
+
+            }
+
+            @media (max-width:866px) {
+                .about .pic {
+                    text-align: center;
+                }
+
+                .about {
+                    flex-direction: column;
+                    gap: 0px;
+                    height: 450px;
+                    padding: 0px;
+                }
+
+                .about img {
+                    width: 250px;
+                }
+
+            }
+
+
+            @media (max-width:780px) {
+                .information {
+                    gap: 60px;
+                }
+            }
+
+
+            /* .btn{ /* to voluntarily place buttton at top right corner
+    position: absolute;
+      right:10px;
+      top:17px;
+    
+     }
+     .btn1{
+  display:block;
+     border-radius: 7px;
+      border:0px;
+      height:38px;
+     position: absolute;
+      right:100px;
+      top:17px;
+      
+     }*/
+
+
+
+            /* when menu is clicked*/
+            /*.item{
+    display: block;
+   }*/
+            /*
+   #navigation{
+    width:100%;
+  height:340px;
+    display:inline-flex;
+    flex-direction: column;
+ 
+    gap:10px;
+   }
+   #elements-id{
+    display:inline-flex;
+    flex-direction: column;
+    margin-left:0px ;
+    padding: 20px;
+    gap:10px;
+    width:100%;
+   }
+  
+  
+   
+    .it{
+      font-size: 20px;
+    }
+    .btn1{
+      margin-top: 10px;
+    }
+     /************/
+        }
+
+        /***********************************************/
+        /********modal login and sign-in***********/
+        input {
+
+
+            background-color: transparent;
+
+            border: 1.5px solid rgb(78, 74, 74);
+            height: 50px;
+            width: 100%;
+            font-size: 1.2rem;
+            border-radius: 70px;
+            padding-left: 60px;
+        }
+
+        input:focus {
+            outline: 0px;
+
+
+        }
+
+        .logip1 {
+            position: relative;
+        }
+
+        .logip {
+            margin: auto;
+
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        label {
+            position: absolute;
+            left: 40%;
+            top: 25%;
+
+
+        }
+
+        .modal-dialog {
+
+            width: 430px;
+
+        }
+
+
+        button {
+            border-radius: 20px;
+            border: 1px solid black;
+            height: 50px;
+        }
+
+        .terms {
+            margin-bottom: 20%;
+            margin-top: 5%;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        .terms2 {
+            margin-bottom: 20%;
+            margin-top: 5%;
+            padding-left: 20%;
+            padding-right: 10%;
+        }
+
+        .login-page {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            backface-visibility: hidden;
+        }
+
+        .sign-up {
+            position: absolute;
+            top: 100px;
+            height: 100%;
+            width: 100%;
+
+            transform: rotateY(180deg);
+
+
+
+        }
+
+        .login-page:hover {
+            transform: rotateY(180deg);
+            transition: 1 s;
+            background-color: #702c63;
+        }
+
+        .modal-content {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            transition: 0.8s;
+            backface-visibility: hidden;
+        }
+
+        #box-ls {
+            height: 604.58px;
+            width: 100%;
+            transition: 0.8s;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        .boxt {
+            transform: rotateY(180deg);
+            transition: 0.8s;
+            /*
+    backface-visibility: hidden;*/
+        }
+
+        #bbox2 {
+            -webkit-backface-visibility: hidden;
+            /* Vendor-prefixed property */
+            backface-visibility: hidden;
+            /* Standard property */
+        }
+        #some-info{
+/*background-color: #691b5a;*/
+  padding: 10%;
+  height:2000px;
+  width:100%;
+  /*position: relative;*/
+  z-index: -1;
+  padding-top:0px ;
+  
+}
+.some-info-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:30px;
+  z-index: -1;
+}
+.roww{
+  width:100%;
+  height:480px;
+  display: flex;
+  gap:20%;
+justify-content: center;
+}
+.rowwhead{
+  height: 300px;text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap:100px;
+}
+.inner{
+    
+  background-color: #65275a;
+  width:34%;
+  height: 380px;
+  border-radius:50% ;
+  transition: border-radius 0.5s ease;
+  
+}
+.inner12{
+  align-self: end;
+}
+.inner11{
+  align-self:top;
+}
+#side-head{
+ writing-mode: vertical-lr;
+position: absolute;
+width:110px;
+height: 800px;
+left:80%;
+z-index: -1;
+}
+.change{
+    border-radius: 20%;
+}
+        /**********************/
+    </style>
+</head>
+
+<body>
+    <div id="contt">
+        <nav class="navbar navbar-expand-lg " id="navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('home') }}">
+                    <h3 style="padding-left:10px">NUTRITIOUS</h3>
+                </a>
+                <button class="navbar-toggler collapsed" style="margin-right: 10px; margin-bottom: 10px;" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+                    aria-expanded="false" aria-label="Toggle navigation" onclick="func3()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
+                        class="bi bi-caret-down-square-fill" style="background-color:white; border-radius:50%;"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z" />
+                    </svg>
+                </button>
+
+                <div class="navbar-collapse collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/createmeal">
+                                <h4>create meal</h4>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/diet-plan">
+                                <h4>diet plan</h4>
+                            </a>
+                        </li>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="/pdf_display">
+                                <h4>my plans</h4>
+                            </a>
+                        </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <h4>About us</h4>
+                            </a>
+                        </li>
+                    </ul>
+                    <form action="{{ url_for('logout') }}" method="post">
+                        <!--<button type="submit">Logout</button>-->
+                        <div class="btn-sign" style="padding-right:10px;"><button type="submit" class="btn" data-bs-toggle="modal"
+                            data-bs-target="#gridSystemModal" fdprocessedid="p9pbto" id="log-out"
+                            style="background-color:rgb(228, 228, 228); font-family: Tanker; color:#702c63;">LOG-OUT</button></div>
+                    </form>
+                </div>
+            </div>
+        </nav><!---******-->
+        <!--*************-->
+        </section>
+
+        <section class="title-main-part">
+            <div class="bod">
+                <div class="content">
+                    <p class="head" style="color:rgb(228, 228, 228);">KEEP A </p>
+                    <p class="head" style="color:rgb(228, 228, 228);">CHECK ON YOUR DIET !</p>
+                    <p class="under_head" style="color:rgb(228, 228, 228);"> Focusing on Eating Well and Rethinking
+                        Diets</p>
+                </div>
+                <div class="img1"><img src="/static/balanced-diet.jpg" width="" height /></div>
+            </div>
+
+        </section>
+        <section id="inf">
+            <div class="princple" style="width:100%; margin-top: 50px;">
+                <h1 style="text-align: center;">princples of Diet plan</h1>
+            </div>
+            <div class="information">
+                <div class="box" id="cont1">
+                    <div class="flip-inner">
+                        <div class="flip-front"><img src="/static/diet-plan-schedule-healthy-food-600nw-2277986133.webp"
+                                width="100%" style="background-color:white; border-radius: 50%; margin-bottom: 15px;">
+                            <h3 style="text-align: center;"> balanced diet</h3>
+                        </div>
+
+
+                        <div class="flip-back">
+                            <p>The diet plan acts as a bespoke template to steer your eating behaviour, exercise and
+                                lifestyle
+                                management towards optimal health and wellbeing. so, it is important to know what and
+                                how much you
+                                consume on a daily-basis in terms of quantity. our diet changes as our age progress and
+                                becomes more and
+                                more particular when it comes for a choice. having a good knowledge about our diet gives
+                                us an awareness
+                                and good knowledge about human health.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="box" id="cont2">
+                    <div class="flip-inner">
+                        <div class="flip-front"><img src="/static/istockphoto-foodgroup.jpg" width="100%"
+                                style="border-radius: 50%; margin-bottom: 15px;" />
+                            <h3 style="text-align: center;">food groups</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p> Maintaining adequate levels of energy, nutrients, movement and rest for optimal
+                                health.Balancing
+                                differnt food groups and consuming in right proortion.Consuming the appropriate number
+                                of calories to
+                                maintain a healthy weight depending on your metabolism and exercise levels.</p>
+                            <p>Five main food groups :</p>
+                            <ul>
+                                <li>Fruits and Vegetables</li>
+                                <li>Starchy Food</li>
+                                <li>Dairy</li>
+                                <li>Protein</li>
+                                <li>Fat</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="box" id="cont3">
+                    <div class="flip-inner">
+                        <div class="flip-front"> <img
+                                src="/static/diet-plan-slim-woman-doing-exercise-and-planning-vector-41322494.jpg"
+                                width="100%;" style="border-radius: 50%;margin-bottom: 15px;" />
+                            <h3 style="text-align: center;">exercise</h3>
+                        </div>
+                        <div class="flip-back">
+                            <p>Regular physical activity contributes to weight management by burning calories and
+                                preventing obesity.
+                                It strengthens the heart, improves circulation, and lowers the risk of cardiovascular
+                                diseases. Exercise
+                                is essential for building and maintaining strong muscles and bones, reducing the risk of
+                                osteoporosis.
+                                It positively impacts mental health by releasing endorphins, reducing stress, and
+                                lowering the risk of
+                                depression and anxiety disorders. Engaging in physical activity has been linked to
+                                improved cognitive
+                                function, including better memory and attention. It promotes better sleep quality and
+                                duration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="princple" style="width:100%; margin-top: 50px;">
+                <h2 style="text-align: center;"></h2>
+            </div>
+        </section><!--
+        <section id="some-info">
+            <div class="some-info-div">
+                <h1 style="font-size: 15vh;" id="side-head">know some facts !</h1>
+          <div class="rowwhead"><div><h1 style="font-size: 9vh;">why is it important?</h1></div><div><h4>balanced diet helps make sure that our bodies get all the nutrients needed to work well and feel good.</h4></div></div>
+          <div>
+          
+          <div class="roww" id="roww1"> <div class="inner inner11" ><img  src="/static/fruits and vege.webp" width="70%" style="border-radius: 50%; margin-left: 15%; margin-top: 5%;margin-bottom: 4%; padding: 2%;" height="250px"/> <h3 style="text-align:center;">Vegetables</h3></div><div class="inner inner12"></div></div>
+          <div class="roww" id="roww2"> <div class="inner inner11"></div></div>
+          <div class="roww" id="roww3"> <div class="inner inner11" ></div><div class="inner inner12"></div></div>
+          </div>
+          </div>
+      
+          </section>-->
+        <section id="about-site">
+            <div class="about d-flex"> 
+                <div class="pic"> <img src="/static/imgg.svg" style="border-radius: 10%; background-color: beige;" />
+                </div>
+                <div class="about-cont">
+                    <h3 style="text-align: center;">what's this site about</h3>
+                    <p style="color:white; text-align:left">Our cutting-edge Diet Recommendation System is designed to
+                        guide you
+                        on a personalized path to optimal well-being, making achieving your health and fitness goals
+                        easier and more
+                        enjoyable than ever. Navigating the world of nutrition can be overwhelming, but we're here to
+                        simplify it
+                        for you. Receive clear, concise meal plans, snack ideas, and recipes that align with your
+                        dietary
+                        requirements and taste preferences. We are here to guide you to "HAVE A CHECK ON YOUR DIET"</p>
+                </div>
+            </div>
+            <div class="container">
+                <footer class="py-3 my-4">
+                    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">
+                                <h4>create meal</h3>
+                            </a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">
+                                <h4>diet plan</h4>
+                            </a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">
+                                <h4>my plans</h4>
+                            </a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">
+                                <h4>FAQs</h4>
+                            </a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">
+                                <h4>About us</h4>
+                            </a></li>
+                    </ul>
+                    <p class="text-center text-body-light" style="font-family: Tanker;">© 2023 Company, Inc</p>
+                </footer>
+            </div>
+        </section>
+    </div>
+    <script>
+        /*window.addEventListener("resize", myFunction);
+        var d=document.getElementById("elements-id");
+        /*function myFunction(){
+      let w=window.innerWidth;
+        if (w>1235){
+      d.style.opacity="1"; 
+      }
+      else if(w<=1235){
+      d.style.opacity="0";}
+        }*/
+        function modalfunction() {
+            var d = document.getElementById("box-ls");
+            d.classList.toggle("boxt");
+        }
+        /*
+        function func(){
+      
+         
+          if(d.style.opacity==0){
+          var n=document.getElementById("navigation");
+          n.style.flexDirection="column";
+          n.style.height="380px";
+          n.style.transitionDuration="0.4s";
+        
+          d.style.opacity="1";
+          d.style.transitionDelay="1s";
+          d.style.transition="2s";
+      }
+      else if(d.style.opacity==1){
+      
+          d.style.opacity="0";
+          d.style.transitionDelay="0s";
+          d.style.transition="0s";
+          var n=document.getElementById("navigation");
+          n.style.flexDirection="row";
+          n.style.height="100px";
+          n.style.trnasitionDelay="0.5s";
+          n.style.transition="0.3s ease-out";
+      }
+      }
+      function func3(){
+        var d=document.getElementById("navigation");
+        d.classList.toggle("navbar-col-change");
+      
+      }*/
+  
+function f(){
+    console.log("hi");
+}
+
+
+var dd=document.getElementsByClassName("inner inner11");
+for (let i=0;i<dd.length;i++){
+    dd[i].addEventListener("mouseover",()=>{dd[i].classList.toggle("change");})
+    dd[i].addEventListener("mouseout",()=>{dd[i].classList.toggle("change");})
+}
+
+
+
+    </script>
+
+</body>
+
+</html>

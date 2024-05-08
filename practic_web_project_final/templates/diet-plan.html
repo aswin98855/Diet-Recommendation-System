@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+         @font-face {
+    font-family: Tanker;
+    src: url('/static/Tanker-Regular.otf') format('otf'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.eot') format('eot'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.ttf') format('ttf'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.woff') format('woff'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.woff2') format('woff2');
+  
+        }
+        h1,h2,h3{
+            font-family: Tanker;
+            color: white;
+        }
+    body{
+        background-color: #79356d;
+      
+      
+       
+    }
+    p{  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color:rgb(236, 236, 236);
+        font-size: 1.4rem;
+        font-weight: 600;
+       
+     
+    }
+    /********/
+    #womencalc{
+        position: absolute;
+        top:10px;
+        right:30px;
+        width:30vh;
+    }
+    @media (max-width:1176px){
+        #womencalc{
+        width:25vh;}
+    }
+    @media (max-width:802px){
+        #womencalc{
+        width:20vh;}
+    }
+    @media(max-width:507px){
+    #womencalc{
+        display: none;
+    }
+    }
+    /**********/
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+    input{
+        background: transparent;
+        border: 2px solid white;
+        color:white;
+        border-radius: 7px;
+        height:100px;
+        width:100%;
+        font-size: 1.575rem;
+        position: relative;
+        z-index: 1;
+        padding-left: 30%;
+    }
+    .sel-opt-label{
+        /*display: none;*/
+        border-radius: 0px;
+    height: 0px;
+  transition: height 0.6s ease;
+
+
+    }
+    .bmi{
+        display: flex;
+        gap: 10%;
+        margin-bottom: 50px;
+        width:100%;
+        position: relative;
+        
+    }
+    .sel-opt{
+        height: 100px;
+        width:300px;
+        border-style: white;
+        border-width: 2px;
+        background-color: transparent;
+    }
+    .head{
+        text-align: center;
+        height: 100px;
+    }
+    .cont{
+        width:100%;
+        padding:10%;
+        /*min-width:572px;*/
+    }
+    label{
+        position:absolute;
+        font-size: 2rem;
+        font-family: Tanker;
+        color: white;
+        transition: 0.2s ease;/* what ever you do any actions its adds transistion delay...for reverting back*/
+    }
+    #age{
+        left:7%;
+        
+    }
+    #height{
+        left:40%;
+    }
+    #weight{
+        left:74%;
+    }
+    input:focus{
+        border: 1px solid white;
+    }
+    /*
+    input:focus + label{
+        z-index: 1;
+        background-color:#79356d;
+        transition: 0.2s ease;
+        
+        transform: translate(15px,-27px);
+
+    }*/
+/*testing on this box **/
+
+    .label-res{
+        z-index: 1;
+        background-color:#79356d;
+        transition: 0.2s ease;
+        
+        transform: translate(15px,-27px);
+
+    }
+    /***/
+    span{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+  
+
+
+    /************/
+    .life-style{
+        display:flex;
+        gap:10%;
+        margin-bottom: 50px;
+    }
+option{
+    font-family: Tanker;
+    font-size: 1.2rem;
+  background-color:white;
+  color: #79356d;
+
+ 
+    
+}
+select{
+    font-family: Tanker;
+    font-size: 1.8rem;
+    border: 1px solid white;
+    border-radius: 7px;
+    color: white;
+}
+#exc{
+    width:750px;
+}
+#exc>option{
+    font-size:1.5rem;
+}
+#diseases{
+    /*width:750px;*/
+    width:100%;
+   /*.............*/
+}
+/***********/
+button{
+    width:100%;
+    height: 70px;
+     background-color:rgb(236, 236, 236);
+     border: 0px;
+     border-radius: 7px;
+     font-size: 1.2rem;
+
+}
+/****/
+.some-knowledge{
+    
+    width:100%;
+    padding: 10%;
+   
+}
+.heading{
+    text-align: center;
+}
+#agepic{
+    width:40%;
+    height:50%;
+    border-radius: 10%;
+}
+.about-age{
+    width: 100%;
+   padding: 10%;
+    display: flex;
+    gap:5%;
+    background-color: #652859;
+}
+.content1{
+  
+    width:60%;
+}
+#healthpic{
+    width:40%;
+    height:50%;
+    border-radius: 10%;
+}
+#life-stylepic{
+    width:40%;
+    height:50%;
+    border-radius: 10%;
+}
+.display{
+    /*display: block;*/
+    opacity: 1;
+    pointer-events:auto;
+   
+    transition: height 1s ease;
+    height:210px;
+    border-radius: 0px 0px 7px 7px;
+}
+.dis-block{
+    display: none;
+}
+.wierd{
+    border-style: solid;
+    border-color: white;
+    width:100%;
+    height: 100px;
+    border-width: 2px 2px 0px 2px;
+    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+    padding-top: 25px;
+}
+.item-in-box{
+    height:30px ;
+    width:23%; background-color:white; border-radius:10px;
+
+    
+}
+.itembox{
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    display: flex;
+    gap:5px;
+    width:100%;
+}
+.home{
+    position: absolute;
+    top:20px;
+    left:50px
+}
+a{
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <div class="cont"> 
+        <div class="home"><a href="/"><h2>Nutritious</h2></a></div>
+        <img id="womencalc" src="/static/cosmaa200600389.jpg" style="border-radius: 50%;">
+    <div class="head">
+        <h1>calculator</h1>
+    </div>
+<form id="Form" method="post" action="{{ url_for('submit') }}">
+    <div class="bmi">
+        <div>
+        <input id="ageip" type="number" name ="age">
+        <label id="age" ><span>Age</span></label></div>
+        <div><input id="heightip" type="number" name="height">
+        <label id="height"><span>height</span></label>
+        </div>
+        <div>
+        <input id="weightip" type="number" name="weight">
+        <label id="weight"><span>weight</span></label>
+        </div>
+    </div>
+    <div class="life-style">
+
+        <select class="sel-opt" id="gender" name="gender">
+           
+            <option value="male" >Male</option>
+            <option value="female">Female</option>
+            <option value="O">Other</option>
+        </select>
+
+        <select class="sel-opt"id="exc" name="activityLevel">
+           
+            <option value="sedentary">Sedentary</option>
+                <option value="lightly active">Lightly Active</option>
+                <option value="moderately active">Moderately Active</option>
+                <option value="very active">Very Active</option>
+                <option value="extra active">Extra Active</option>
+        </select>
+    </div>
+    <div class="life-style">
+        
+        <select class="sel-opt" id="veg-nonveg" name="meal">
+           
+            <option value="Vegetarian" >Vegetarian</option>
+            <option value="Non-Vegetarian">Non-Vegetarian</option>
+        </select>
+        <div style="width:100%; display: flex; gap:0px; flex-direction: column;">
+        <!--<input class="wierd" id="wd"onclick="display_dis(id)">-->
+             <div class="wierd itembox" id="wd"></div>
+              <select class="sel-opt-label" name="diseases" id="diseases" multiple>
+           
+            <!--<option value="" >any health conditons ?</option>--->
+            <option value="Coeliac disease">Coeliac Disease</option>
+            <option value="Hypothyroidism">Hypothyroidism</option>
+            <option value="Hyperthyroidism">Hyperthyroidism</option>
+            <option value="Diabetes insipidus">Diabetes Insipidus</option>
+            <option value="Frozen Shoulder">Frozen Shoulder</option>
+            <option value="Trigger Finger">Trigger Finger</option>
+            <option value="Haemochromatosis">Haemochromatosis</option>
+            <option value="Acute Pancreatitis">Acute Pancreatitis</option>
+            <option value="Chronic Pancreatitis">Chronic Pancreatitis</option>
+            <option value="Nausea and vomiting">Nausea and Vomiting</option>
+            <option value="Migraine">Migraine</option>
+            <option value="Mononucleosis">Mononucleosis</option>
+            <option value="Stomach aches">Stomach Aches</option>
+            <option value="Conjunctivitis">Conjunctivitis</option>
+            <option value="Dry Mouth">Dry Mouth</option>
+            <option value="Acne">Acne</option>
+            <option value="Malnutrition">Malnutrition</option>
+            <option value="Diabetes">Diabetes</option>
+            <option value="Kidney Infection">Kidney Infection</option>
+            <option value="Obstructive Sleep Apnea">Obstructive Sleep Apnea</option>
+            <option value="Thyroid">Thyroid</option>
+            <option value="Scleroderma">Scleroderma</option>
+            <option value="Acromegaly">Acromegaly</option>
+            <option value="Phoechromocytoma">Phoechromocytoma</option>
+            <option value="Lupus">Lupus</option>
+            <option value="Cushing Syndrome">Cushing Syndrome</option>
+            <option value="Hypertension">Hypertension</option>
+            <option value="Type 2 Diabetes">Type 2 Diabetes</option>
+            <option value="High blood pressure">High Blood Pressure</option>
+            <option value="Heart Disease">Heart Disease</option>
+            <option value="Stroke">Stroke</option>
+            <option value="Sleep apnea">Sleep Apnea</option>
+            <option value="Metabolic syndrome">Metabolic Syndrome</option>
+            <option value="Fatty liver disease">Fatty Liver Disease</option>
+            <option value="Osteoarthritis">Osteoarthritis</option>
+            <option value="Gallbladder diseases">Gallbladder Diseases</option>
+            <option value="Kidney Diseases">Kidney Diseases</option>
+            <option value="Measles">Measles</option>
+            <option value="Mouth Ulcer">Mouth Ulcer</option>
+            <option value="Sore Throat">Sore Throat</option>
+            <option value="Yellow Fever">Yellow Fever</option>
+        </select>
+        </div>
+    </div>
+    <div class="butt-create-dietplan"><a href="/diet-plan/diet-chart">
+<button class="button-dp"><h3 style="color:#79356d">  create diet plan</h3></button></a>
+    </div>
+</form>
+
+</div>
+
+<div class="some_knowledge">
+    <!---<div class="heading"><h2>want know about these factors ?</h2></div>-->
+    <div class="about-age">
+        <img id="agepic" src="/static/natalie-grainger-8uB5kFKWWkk-unsplash.jpg">
+         <div class="content1">
+            <h2>BMI</h2>
+           <p> Age plays a crucial role in determining the nutritional needs of individuals, and a balanced diet should be tailored to meet the specific requirements of each age group. Infants and young children, for instance, require a diet rich in essential nutrients such as vitamins and minerals to support rapid growth and development. Adequate intake of calcium and vitamin D is essential for the development of strong bones and teeth during childhood and adolescence.  As individuals enter adulthood, the emphasis shifts towards maintaining overall health and preventing age-related conditions. A balanced diet for adults should include a mix of macronutrients (carbohydrates, proteins, and fats), micronutrients (vitamins and minerals), and sufficient fiber. Proper hydration becomes increasingly important to support various bodily functions.
+         </p></div>
+
+    </div>
+    <div class="about-age">
+      
+        <div class="content1">
+            <h2>health</h2>
+            <p>Maintaining a healthy diet can help prevent a range of health issues, including cardiovascular diseases, diabetes, and certain types of cancers. It also supports weight management, as a balanced diet helps regulate calorie intake and promotes a healthy metabolism.
+
+                In addition to physical health, nutrition plays a crucial role in mental well-being. Nutrient-rich foods, such as those containing omega-3 fatty acids and antioxidants, have been linked to cognitive function and mood regulation. Proper hydration is also vital for cognitive performance and overall mental clarity.</p>
+        </div>
+       <img id="healthpic" src="/static/health.jpg">
+    </div>
+    <div class="about-age">
+        <img id="life-stylepic" src="/static/lifest.jpg"/>
+        <div class="content1">
+            <h2>life style</h2>
+            <p>Achieving a balanced diet is not merely about the foods you consume; it encompasses a holistic approach to lifestyle choices. Begin with thoughtful meal planning, incorporating a diverse range of foods to ensure a comprehensive intake of essential nutrients. Regular, well-timed meals contribute to sustained energy levels and prevent overeating. Mindful eating, focusing on the sensory experience of each bite, encourages a healthier relationship with food. Portion control is pivotal, as is the importance of hydration for optimal digestion and nutrient absorption. Limiting processed foods and embracing whole, nutrient-dense options supports overall well-being.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deselect(id){
+
+console.log("deselect it");
+document.getElementById(id).remove();
+
+    }
+    function showit(n){
+
+var xy=document.getElementById("wd");
+var zx=document.createElement("button");
+
+zx.id="butt"+n;
+zx.style.fontFamily='Tanker';
+//zx.addEventListener('click', (event) => {event.preventDefault();deselect(zx.id);});
+zx.addEventListener('click', (event) => {event.preventDefault();});
+//zx.style.cursor='pointer'; when di used
+//zx.addEventListener("click",function(){deselect(n);})
+zx.classList.add("item-in-box");
+//var zxc=document.createElement("h3");
+//zxc.style.color='rgb(105, 103, 103)';
+//zxc.style.fontSize="100%";
+zx.innerHTML=n+"  ";
+var im=document.createElement("img");
+im.src='static/x-circle.svg';
+im.style.color='rgb(105, 103, 103)';
+zx.appendChild(im);
+
+//zxc.appendChild(zxci);
+//zx.appendChild(zxc);
+xy.appendChild(zx);
+    }
+    var z=document.getElementById("diseases");
+    var zc=z.children
+    for (let i =0;i<zc.length;i++){
+        zc[i].addEventListener("click",function(){showit(zc[i].value);});
+    }
+
+
+    var d=[];
+     d[0]=document.getElementById("ageip");
+     d[1]=document.getElementById("heightip");
+         d[2]=document.getElementById("weightip");
+   
+
+         for (let i=0; i<d.length;i++)
+         {
+        d[i].addEventListener("focusin",function(){ focusedin(i);  });
+        d[i].addEventListener("focusout",function(){ focusedout(d[i],i);   });
+
+         }
+         function focusedin(n){
+        
+        var f;
+    if (n===0){
+    f=document.getElementById("age");}
+    
+    else if (n===1){f=document.getElementById("height");}
+  else if(n===2){
+    f=document.getElementById("weight");}
+  f.classList.add("label-res");
+
+}
+    function focusedout(eve,n){
+        var f;var m=1;
+    if (n===0){
+    f=document.getElementById("age");
+    if(eve.value!==""){
+     m=0;
+    }
+}
+    
+    else if (n===1){f=document.getElementById("height");
+    if(eve.value!==""){
+     m=0;
+    }
+}
+  else if(n===2){
+    f=document.getElementById("weight");
+    if(eve.value!==""){
+     m=0;
+    }
+}
+  if (m===1){
+  f.classList.remove("label-res");}
+  
+
+  
+    }
+    var ddx=document.getElementById("diseases");
+    ddc=ddx.children;
+    for (let  i=0;i<ddx.length;i++){
+        ddx.children[i].id="lst"+ddx.children[i].value;
+    }
+    
+document.getElementById("Form").addEventListener("click",(event)=>{some(event,"");});
+
+
+function some(e,id){
+    console.log(event.target.id);
+        var dx=document.getElementById("diseases");    
+if(event.target.id!=="wd"){
+var str=(event.target.id).slice(0,3);
+id=id.slice(0,3);
+if(str!=="lst" && str!=="but"){//except these.......
+ 
+dx.classList.remove("display");
+}
+else if(str==="but"){
+    document.getElementById(event.target.id).remove();
+    var strr=(event.target.id).slice(4,(event.target.id).length);
+    strr="lst"+strr;
+    document.getElementById(strr).selected=false;
+}
+}
+else{
+    
+   
+    if(dx.classList.contains("display"))
+    {return ;}
+    else{dx.classList.add("display");}
+}
+}
+
+    
+    
+    
+   /* function display_dis(id){
+    var dx=document.getElementById("diseases");
+    dx.classList.add("display");
+   //document.getElementById(id).firstElementChild.classList.toggle("dis-block");
+   
+  }
+*/
+</script>
+</body>
+</html>

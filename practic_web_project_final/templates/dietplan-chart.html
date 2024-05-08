@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="/static/progress.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    
+    @font-face {
+    font-family: Tanker;
+    src: url('/static/Tanker-Regular.otf') format('otf'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.eot') format('eot'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.ttf') format('ttf'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.woff') format('woff'),
+         url('/static/Tanker_Complete/Fonts/WEB/fonts/Tanker-Regular.woff2') format('woff2');
+  
+        }
+        h1,h2,h3,li{
+            font-family: Tanker;
+            color: white;
+            font-size:2.6vw ;
+        }
+        h3{
+          color:#702c63;
+        }
+        li{
+          font-size: 2vw;
+          color:rgb(54, 53, 53)
+        }
+    body{
+      background-color: rgb(255 248 229); 
+    }
+    .heading{
+      height:75vh;
+      background-color: #702c63;
+      border-bottom-right-radius:60% ;
+      border-bottom-left-radius:60% ;
+
+      text-align: center;
+      position: relative;
+    }
+    .titl{
+     position:absolute;
+     left:40%;
+     top:38%;
+     color:rgb(74, 62, 47);
+    
+    }
+    
+  
+    .buttonbox{
+      padding-top: 0.5%;
+      width:100%;
+      display: flex;
+     gap:15%;
+     justify-content: space-around;
+    
+    }
+    .ele{
+      height:100;
+      padding-top: 2%;
+      border-radius: 7px;
+      border-color: white;
+
+    
+    }
+    .items{
+    width:100%;
+  display: flex;
+  gap:5%;
+    height: 500px;
+     
+    }
+    .item1{
+      border-radius: 10px;
+    height:150%;
+    background-color:antiquewhite;
+    width:60%;
+    overflow-y: scroll;
+    box-shadow:2px 0px 5px -2px;
+    }
+    .item2{
+      padding:5%;
+    
+     width:34%;
+     height:150%;
+     background-color:antiquewhite;
+     border-radius: 10px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     gap:10%    ;
+     /*overflow-y: scroll;*/
+    }
+    .page{
+      display: flex;
+      flex-direction: column;
+      gap:50px;
+    }
+    .it {
+      width: 100%;
+      padding: 10%;
+
+    }
+   .itemname{ 
+    margin-top: 5%;
+    border-width:0px;
+    box-shadow: 3px 3px  3px -2px;
+    font-family: Tanker;
+    color:#702c63;
+    font-size: 2vw;
+   }
+   .item-list{
+    width:100%;
+    display:flex;
+    gap:5%;
+    flex-wrap:wrap;
+   }
+   .chart-display{
+    width:100%;
+    height: 750px;
+  margin-top: 250px;
+    background-color:antiquewhite;;
+    display: flex;
+   gap:5%;
+    border-radius: 10px;
+    padding: 5%;
+   }
+   .chart-items{
+  
+    width:100%;
+    height:550px;
+    overflow-y: scroll;
+   }
+   .chartcat{
+    width:25%;
+   }
+.lunch,.dinner,.snacks{
+  display: none;
+}
+#headimg{
+
+position: relative;
+top:4%;
+width:40%;
+  
+}
+.itemname{
+
+border-radius: 10px;
+}
+.selected{
+  color:white;
+  background-color: #702c63;
+}
+.tick-mark{
+  background-color: white;
+  border-radius: 50%;
+}
+  </style>
+</head>
+<body>
+  <div class="page">
+  <div class="heading">
+    <img id ="headimg" src="/static/dieting-healthy-lifestyle-weight-loss-concept-woman-cartoon-character-standing-choosing-between-healthy-and-unhealthy-food-fastfood-vs-balanced-menu-illustration-vector.jpg" style="border-radius:50% ;"><h1 class="titl">recommendations</h1></div>
+  <div class="buttonbox container" >
+    
+    <button class="ele" id="breakfast" onclick="breakfastdis()"><h3>breakfast</h3></button>
+    <button class="ele" id="lunch" onclick="lunchdis()"><h3>lunch</h3></button>
+    <button class="ele" id="snacks" onclick="snacksdis()"><h3>snacks</h3></button>
+    <button class="ele" id="dinner" onclick="dinnerdis()"><h3>dinner</h3></button>
+  </div>
+  <div class="items container">
+
+<div class="item1">
+  <div class="it breakfast" id="it1">
+    <h3>breakfast grains</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Breakfast grains" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}   
+    
+    
+    </div>
+  </div>
+  
+  <div class="it breakfast" id="it2">
+    <h3>fruits</h3>
+    <div class="item-list">
+  {% for category,item in g.items()  %}
+    {% if category=="Breakfast" %}
+      {% for k,v in item.items() %}
+        {%  if k=="Fruits" %}
+         {% for i in v %}
+          <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+         {% endfor %}
+        {% endif %}
+      {% endfor %} 
+    {% endif %}
+  {% endfor %}
+    
+    </div>
+  </div>
+  
+  <div class="it breakfast" id="it2">
+    <h3>Vegetables</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Vegetables" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>Healthy fats</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Healthy Fats" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>Breads</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Breads" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>juice</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="juice" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>Indian bread</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Indian bread" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>tea & coffee</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Tea & Coffee" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>grains</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Grains" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>indian bread</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Indian bread" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>Vegetables</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Vegetables" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>salads</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Salads" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>Healthy fats</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Healthy Fats" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>soups</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Soup" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>diary</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Dairy" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Tea & coffee</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Tea & Coffee" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>snadwich</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Sandwich" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Nuts & seeds</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Nuts & Seeds" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Fruits</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Fruits" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}      
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Beverages</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Beverages" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>juice</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="juice" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  
+  <div class="it dinner" id="it2">
+    <h3>grains</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Grains" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>indian bread</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Indian bread" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>Vegetables</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Vegetables" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>salads</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Salads" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>Healthy fats</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Healthy Fats" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}   
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>soups</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Soup" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>diary</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Dairy" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    </div>
+  
+  
+  
+  </div>
+
+</div>  
+
+
+<div class="item2">
+  <h3 style="text-align: center; color:rgb(66, 67, 68)">calculator</h3>
+<li>calories
+  <progress id="calorie-progress" value="0" max="100" style="--value: 0; --max: 100;"></progress>
+</li>
+<li>protein
+  <progress id="protein-progress" value="0" max="100" style="--value: 0; --max: 100;"></progress>
+</li>
+ 
+<li>carbs<progress id="carbs-progress" value="0" max="100" style="--value: 0; --max: 100;"></progress></li>
+
+<li>fats<progress id="fats-progress" value="0" max="100" style="--value: 0; --max: 100;"></progress></li>
+<!--<img src="/static/health.jpg" style=" width:50%;margin-left: 20%;">-->
+<div style="text-align: center;"><h3 id="status"></h3></div>
+</div>
+  </div>
+<!--<div style="width:65%;height: 0.7vw;margin-left:20px;background-color:rgb(154, 152, 152);border-radius: 10px;">
+  <div style="width:20%; background-color: #702c63; height: 100%; border-radius: 10px;"></div></div>-->
+
+
+
+  <div class="chart-display container">
+  <div class="chartcat" id="breakfastchart">
+    <h3>breakfast</h3>
+  <div class="chart-items"></div>
+</div>
+  <div class="chartcat" id="lunchchart"><h3>lunch</h3>
+    <div class="chart-items"></div>
+  </div>
+  <div class="chartcat" id="snackschart"><h3>snacks</h3>
+    <div class="chart-items"></div>
+  </div>
+  <div class="chartcat" id="dinnerchart"><h3>dinner</h3>
+    <div class="chart-items"></div>
+  </div>
+  </div>
+  <button class="itemname container" onclick="sendDataToServer()" style="font-family: Tanker;"> download as pdf</button>
+  <button class="itemname container" style="font-family: Tanker;"><a style="text-decoration: none; color: #702c63;" href="{{ url_for('download_file', filename=userid|string ~ '.pdf') }}">Save as pdf</a></button>
+  
+</div>
+</body>
+<script type="text/javascript">
+    function sendDataToServer() {
+    // Get the chart display container
+    var chartDisplay = document.querySelector(".chart-display");
+    
+    // Create an array to store the data
+    var data = [];
+    
+    // Iterate over each chart category
+    chartDisplay.querySelectorAll(".chartcat").forEach(function(chartCat) {
+        // Get the category ID
+        var categoryId = chartCat.id;
+        
+        // Get the chart items within the current category
+        var chartItems = chartCat.querySelectorAll(".chart-items");
+        
+        // Create an array to store the items for the current category
+        var categoryItems = {};
+        
+        // Iterate over each chart item
+        chartItems.forEach(function(item) {
+            // Add the text content of the chart item to the categoryItems array
+
+       var chi=item.children;// the heading parts
+       for (let i=0;i<chi.length;i++){
+        console.log(chi[0]);
+        var key=chi[i].firstChild.textContent;// to get heading content
+        var chil=chi[i].firstElementChild.children;
+        var items=[];
+for (let j=0; j<chil.length;j++ )   {
+
+items.push(chil[j].innerHTML);
+}  
+categoryItems[key]=items;
+}
+
+         //   categoryItems.push(item.textContent.trim());
+            
+        });
+        
+        // Add an object to the data array containing the category ID and its items
+        data.push({ category: categoryId, items: categoryItems });
+    });
+    
+    // Send the data to the server using an HTTP request (e.g., fetch or XMLHttpRequest)
+    // For demonstration, let's use fetch
+    fetch("/receive_data", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        // Handle the response from the server
+        alert('saved to database')
+        console.log("Data sent successfully!");
+    })
+    .catch(error => {
+        // Handle errors
+        console.error("Error sending data:", error);
+    });
+}
+  let rows=null;
+  let rows_ff=null;
+window.onload=()=>{
+  fetch("/get_csv_calorie").then(res=>res.text()).then(csv=>{
+
+rows=csv.split("\n"); });
+fetch("/get_csv").then(res=>res.text()).then(csv=>{
+
+rows_ff=csv.split("\r\n"); });
+
+}
+  var b= document.getElementsByClassName("breakfast");
+  var l= document.getElementsByClassName("lunch");
+  var s= document.getElementsByClassName("snacks");
+  var d= document.getElementsByClassName("dinner");
+  function breakfastdis(){
+   for(let i =0;i<b.length;i++){
+    b[i].style.display="block";
+   }
+   for(let i =0;i<l.length;i++){
+    l[i].style.display="none";
+   }
+   
+   for(let i =0;i<s.length;i++){
+    s[i].style.display="none";
+   }
+   for(let i =0;i<d.length;i++){
+    d[i].style.display="none";
+   }
+  
+  }
+  
+  function lunchdis(){
+    for(let i =0;i<b.length;i++){
+    b[i].style.display="none";
+   }
+   for(let i =0;i<l.length;i++){
+    l[i].style.display="block";
+   }
+   for(let i =0;i<s.length;i++){
+    s[i].style.display="none";
+   }
+   for(let i =0;i<d.length;i++){
+    d[i].style.display="none";
+   }
+  
+    
+  }
+  
+  function snacksdis(){
+    for(let i =0;i<b.length;i++){
+    b[i].style.display="none";
+   }
+   for(let i =0;i<l.length;i++){
+    l[i].style.display="none";
+   }
+   for(let i =0;i<s.length;i++){
+    s[i].style.display="block";
+   }
+   for(let i =0;i<d.length;i++){
+    d[i].style.display="none";
+   }
+  
+  }
+  
+  function dinnerdis(){
+    for(let i =0;i<b.length;i++){
+    b[i].style.display="none";
+   }
+   for(let i =0;i<l.length;i++){
+    l[i].style.display="none";
+   }
+   for(let i =0;i<s.length;i++){
+    s[i].style.display="none";
+   }
+   for(let i =0;i<d.length;i++){
+    d[i].style.display="block";
+   }
+  
+  }
+  
+  var v=document.getElementsByClassName("itemname");
+   for (let i=0 ;i<v.length;i++)
+   { 
+    let inner=v[i].firstChild.textContent;
+    let c=v[i].parentNode.parentNode.className;
+    let h=v[i].parentNode.parentNode.firstElementChild.innerHTML;
+    c=c.substring(3,c.length);
+    v[i].addEventListener("click",function(){ clickedd(v[i],inner,c,h);});
+   }
+
+  function clickedd(b,name, cat,head){
+
+//head sub category
+
+var xz=document.getElementById("status");
+
+    var f=document.getElementById("protein-progress");
+   var f11=document.getElementById("carbs-progress");
+   var f2=document.getElementById("fats-progress");
+    var cols=null;
+    for (let r of rows_ff){
+  let col=r.match( /(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+
+  if(r!=="" && col[0]===name){ cols=col;}}
+
+  var status=true;
+
+
+    if(b.classList.contains("selected")===false){
+      
+//for calories...
+      for (let r of rows){
+  let colsc=r.match( /(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+
+  if(r!=="" && colsc[0]===name){
+   var fc=document.getElementById("calorie-progress");
+   var nnc=colsc[1];
+   //nn=Math.round(nn/j);
+   j='{{adjusted_list[0]}}';
+   nnc=(nnc/Number(j))*100;
+  nnc=Math.round(nnc);
+   
+   nnc=nnc+Number((window.getComputedStyle(fc)).getPropertyValue('--value'));
+  
+   
+   nnc=String(nnc);
+   if(nnc>100){status=false;}
+   //fc.style.setProperty('--value',nnc);
+  
+   
+  }
+}
+// for other items....
+//if(status===true)
+{
+  //let cols=r.match( /(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+
+ // if(r!=="" && cols[0]===name)
+  {
+  var s;var s1;var s2;
+  
+   var nn=cols[4];
+   var nn_carbs=cols[1];
+   var nn_fats=cols[2];
+
+   //nn=Math.round(nn/j);
+   j='{{adjusted_list[4]}}';
+  s=check_set(f,nn,j);// for protein
+  if(s>100){status=false;
+    xz.innerHTML="excessive protein"
+  }
+  j='{{adjusted_list[1]}}';
+  
+  s1=check_set(f11,nn_carbs,j);// for carbs
+      if(s1>100){status=false;
+      xz.innerHTML="excessive carbs"}
+  j='{{adjusted_list[2]}}';
+  s2=check_set(f2,nn_fats,j);// for fats
+  if(s2>100){status=false;
+  xz.innerHTML="excessive fats"}
+
+  
+
+  
+  }
+}
+
+
+if(status!==false)
+{
+  fc.style.setProperty('--value',nnc);//for calories
+  func_set(f,s);
+  func_set(f11,s1);
+  func_set(f2,s2);
+
+
+xz.innerHTML="";
+
+
+
+    b.classList.add("selected");
+    im=b.querySelector('img');
+    im.src="/static/check2-circle.svg";
+    im.classList.add("tick-mark");
+    var f1=null;
+  
+  if (cat ==="breakfast"){
+ f1=document.getElementById("breakfastchart");
+ 
+  }
+  else if(cat==="lunch"){
+    f1=document.getElementById("lunchchart");
+  }
+  else if(cat==="snacks"){
+  f1=document.getElementById("snackschart");
+  }
+  else if(cat==="dinner"){
+    f1=document.getElementById("dinnerchart");
+  }
+    
+  
+
+ f1=f1.children[1];
+ let n=null;
+ var v=String(head+cat);
+if (document.getElementById(v)===null){
+n=document.createElement("h2");
+n.id=head+cat;// this for grains in lunch and grians in dinner ....to avoid ambiguity
+let t=document.createTextNode(head);
+n.appendChild(t);
+/***/
+let u=document.createElement("ul");
+let dd=document.createElement("li");
+//
+dd.id=String(name+cat);// for  ease of deletion
+//
+let tt=document.createTextNode(name);
+
+dd.appendChild(tt);
+u.appendChild(dd);
+
+
+
+f1.appendChild(n);
+
+n.appendChild(u);  
+}
+
+else{
+  n=document.getElementById(head+cat).firstElementChild;
+  /***/
+ // let u=document.createElement("ul");
+let dd=document.createElement("li");
+let tt=document.createTextNode(name);
+//
+dd.id=String(name+cat);
+
+//
+dd.appendChild(tt);
+//u.appendChild(dd);
+
+// previously u appended new <ul> but now appending to the same <ul>
+n.appendChild(dd); 
+//f1.appendChild(n);
+
+
+}
+/*
+let u=document.createElement("ul");
+let dd=document.createElement("li");
+let tt=document.createTextNode(name);
+
+dd.appendChild(tt);
+u.appendChild(dd);
+
+
+
+f1.appendChild(n);
+
+n.appendChild(u);         */
+
+//for calories
+/*
+for (let r of rows){
+  let colsc=r.match( /(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+
+  if(r!=="" && colsc[0]===name){
+   var fc=document.getElementById("calorie-progress");
+   var nnc=colsc[1];
+   //nn=Math.round(nn/j);
+   j='{{adjusted_list[0]}}';
+   nnc=(nnc/Number(j))*100;
+  nnc=Math.round(nnc);
+   
+   nnc=nnc+Number((window.getComputedStyle(fc)).getPropertyValue('--value'));
+   //if(nnc>100){console.log("overloaded");}
+   nnc=String(nnc);
+   
+   fc.style.setProperty('--value',nnc);
+   
+  }
+}*/
+//for other components
+
+//for (let r of rows_ff)
+/*{
+  //let cols=r.match( /(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+
+ // if(r!=="" && cols[0]===name)
+  {
+  
+   var nn=cols[4];
+   var nn_carbs=cols[1];
+   var nn_fats=cols[2];
+
+   //nn=Math.round(nn/j);
+   j='{{adjusted_list[4]}}';
+  func_set(f,nn,j);// for protein
+  j='{{adjusted_list[1]}}';
+  func_set(f11,nn_carbs,j);// for carbs
+  j='{{adjusted_list[2]}}';
+  func_set(f2,nn_fats,j);// for fats
+
+  
+  }
+}*/
+//////
+    }
+    else{console.log("overloaded");}
+
+  }
+  else{
+    b.classList.remove("selected");
+    im=b.querySelector('img');
+    im.src="/static/plus-circle-fill.svg";
+  
+   var nn=cols[4];
+   var nn_carbs=cols[1];
+   var nn_fats=cols[2];
+var xz=document.getElementById("status");
+   //nn=Math.round(nn/j);
+   j='{{adjusted_list[4]}}';
+  func_remove(f,nn,j);// for protein
+  if(xz.innerHTML==="excessive protein"){xz.innerHTML="";}
+  j='{{adjusted_list[1]}}';
+  func_remove(f11,nn_carbs,j);// for carbs
+  if(xz.innerHTML==="excessive carbs"){xz.innerHTML="";}
+  j='{{adjusted_list[2]}}';
+  func_remove(f2,nn_fats,j);// for fats
+  if(xz.innerHTML==="excessive fats"){xz.innerHTML="";}
+  //for calories
+
+  for (let r of rows){
+  let colsc=r.match( /(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+
+  if(r!=="" && colsc[0]===name){
+   var fc=document.getElementById("calorie-progress");
+   var nnc=colsc[1];
+   //nn=Math.round(nn/j);
+   j='{{adjusted_list[0]}}';
+   nnc=(nnc/Number(j))*100;
+  nnc=Math.round(nnc);
+   
+   nnc=Number((window.getComputedStyle(fc)).getPropertyValue('--value'))-nnc;
+
+   nnc=String(nnc);
+   
+   fc.style.setProperty('--value',nnc);
+   
+  }
+}
+
+// now removing the name from display chart
+
+// to remove items ..i have added nmae plus cat as id 
+document.getElementById(name+cat).remove();
+var s=document.getElementById(head+cat);
+var sd=s.querySelector("ul");
+if(sd.firstElementChild===null)
+{
+  s.remove();
+}
+
+  }
+
+  }
+function check_set(f,nn,j){
+
+  nn=(nn/Number(j))*100;
+  console.log(nn);
+  nn=1+Math.round(nn);
+   
+   nn=nn+Number((window.getComputedStyle(f)).getPropertyValue('--value'));
+   
+   nn=String(nn);
+
+return nn;
+}
+  function func_set(fo,nnn){
+    
+ /* nn=(nn/Number(j))*100;
+  nn=Math.round(nn);
+   
+   nn=nn+Number((window.getComputedStyle(f)).getPropertyValue('--value'));
+   
+   nn=String(nn);*/
+   
+   fo.style.setProperty('--value',nnn);
+  
+}
+
+function func_remove(f,nn,j){
+  nn=(nn/Number(j))*100;
+  nn=1+Math.round(nn);
+   
+   nn=Number((window.getComputedStyle(f)).getPropertyValue('--value'))-nn;
+   nn=String(nn);
+   
+   f.style.setProperty('--value',nn);
+}
+    </script>
+    <!--
+
+
+
+  <div class="it breakfast" id="it1">
+    <h3>breakfast grains</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Breakfast grains" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}   
+    
+    
+    </div>
+  </div>
+  
+  <div class="it breakfast" id="it2">
+    <h3>fruits</h3>
+    <div class="item-list">
+  {% for category,item in g.items()  %}
+    {% if category=="Breakfast" %}
+      {% for k,v in item.items() %}
+        {%  if k=="Fruits" %}
+         {% for i in v %}
+          <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+         {% endfor %}
+        {% endif %}
+      {% endfor %} 
+    {% endif %}
+  {% endfor %}
+    
+    </div>
+  </div>
+  
+  <div class="it breakfast" id="it2">
+    <h3>Vegetables</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Vegetables" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>Healthy fats</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Healthy Fats" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>Breads</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Breads" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>juice</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="juice" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>Indian bread</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Indian bread" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    </div>
+  </div>
+  <div class="it breakfast" id="it2">
+    <h3>tea & coffee</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Breakfast" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Tea & Coffee" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>grains</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Grains" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>indian bread</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Indian bread" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>Vegetables</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Vegetables" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>salads</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Salads" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>Healthy fats</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Healthy Fats" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>soups</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Soup" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it lunch" id="it2">
+    <h3>diary</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Lunch" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Dairy" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Tea & coffee</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Tea & Coffee" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>snadwich</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Sandwich" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Nuts & seeds</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Nuts & seeds" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Fruits</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Fruits" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}      
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>Beverages</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Beverages" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it snacks" id="it2">
+    <h3>juice</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Snacks" %}
+        {% for k,v in item.items() %}
+          {%  if k=="juice" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  
+  <div class="it dinner" id="it2">
+    <h3>grains</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Grains" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>indian bread</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Indian bread" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>Vegetables</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Vegetables" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>salads</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Salads" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>Healthy fats</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Healthy Fats" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}   
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>soups</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Soup" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %}  
+    
+    
+    </div>
+  </div>
+  <div class="it dinner" id="it2">
+    <h3>diary</h3>
+    <div class="item-list">
+    {% for category,item in g.items()  %}
+      {% if category=="Dinner" %}
+        {% for k,v in item.items() %}
+          {%  if k=="Dairy" %}
+           {% for i in v %}
+            <button class="itemname">{{i}}<img style="margin-left:5px" src="/static/plus-circle-fill.svg"/></button>
+           {% endfor %}
+          {% endif %}
+        {% endfor %} 
+      {% endif %}
+    {% endfor %} 
+    
+    </div>
+  
+  
+  
+  </div>
+
+
+
+
+    -->
+</html>
