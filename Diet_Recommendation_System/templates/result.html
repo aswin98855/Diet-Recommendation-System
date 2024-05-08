@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Information Result</title>
+    <style>
+        .i{
+            color:blue
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        h2 {
+            color: #4caf50;
+        }
+
+        h3 {
+            color: #333;
+        }
+        .h{
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Health Information Result</h1>
+    </header>
+
+    <section>
+        <h2>Adjusted Nutritional Values</h2>
+        <ul>
+            {% for value in adjusted_list %}
+                <li>{{ value }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Food Recommendations by Category</h2>
+        {% for category, item in g.items() %}
+            <h3>{{ category }}</h3>
+            <ul class="h">
+                {% for k,v in item.items() %}
+                    <h4>{{ k }}</h4>
+                    <ul>
+                        {% for i in v%}
+                          <li class="i">{{i}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </section>
+
+    <footer>
+        &copy; 2024 Your Website Name
+    </footer>
+</body>
+
+</html>
