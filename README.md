@@ -7,9 +7,13 @@
 3. Css
 4. Javascript
 
+### Database Used :
+
+1. Mongo DB
+
 To run the Project Download the zip and open the Terminal and run
 
-'''python app2.py'''
+## python app2.py
 
 This Project consists of  3 pages:
 
@@ -83,11 +87,19 @@ This Project consists of  3 pages:
 
 ![displaying selected food items in diet calculator](https://github.com/aswin98855/Diet-Recommendation-System/assets/116991167/f75aee31-c134-4d6c-899e-5ad23e9726a1)
 
-### Saving PDF path to database
+### Saving PDF path to Database
 
 ![saving image to database](https://github.com/aswin98855/Diet-Recommendation-System/assets/116991167/01c830a5-f879-41f5-a380-ae8c52840fab)
 
 ### Saving pdf
 
 ![saving_pdf](https://github.com/aswin98855/Diet-Recommendation-System/assets/116991167/fe39aefd-a9ab-4939-b931-f8e3620aea71)
+
+### User Details in Database
+
+![User_database](https://github.com/aswin98855/Diet-Recommendation-System/assets/116991167/07e77963-ad4c-46d1-820c-4d1dfec58ee2)
+
+### Pdf paths in Database
+
+![pdf_paths](https://github.com/aswin98855/Diet-Recommendation-System/assets/116991167/5ddaa45f-9c1d-4b07-8eb6-5f78976ad7e6)
 
