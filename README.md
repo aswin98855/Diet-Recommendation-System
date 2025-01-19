@@ -13,7 +13,7 @@
 
 To run the Project Download the zip and open the Terminal and run
 
-## python app2.py
+#### python app2.py
 
 This Project consists of  3 pages:
 
